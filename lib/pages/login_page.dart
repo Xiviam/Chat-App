@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:chat_app/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -76,7 +74,7 @@ class LoginPage extends StatelessWidget {
             // login button
             CustomButton(
               text: 'Login',
-              onTap: () => loginMethod,
+              onTap: () => loginMethod(context),
             ),
 
             // register label
@@ -84,7 +82,7 @@ class LoginPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Don\'\ have a account?',
+                Text('Dont have a account?',
                 style: TextStyle(color: Theme.of(context).colorScheme.primary),
                 ),
                 GestureDetector(
