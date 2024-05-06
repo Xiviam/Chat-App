@@ -1,27 +1,39 @@
+import 'package:chat_app/service/auth/auth_service.dart';
 import 'package:flutter/material.dart';
 import '../widgets/custom_button.dart';
-import 'package:chat_app/auth/auth_service.dart';
 import '../widgets/custom_textfield.dart';
 
 class RegisterPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmpasswordController = TextEditingController();
-  
-  void Function()? togglePage;
-  
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  final void Function() togglePage;
+
   RegisterPage({super.key, required this.togglePage});
 
-  void registerMethod(BuildContext context) async {
+  void registerMethod(BuildContext context) {
     final _auth = AuthService();
-    if(_passwordController.text == _confirmpasswordController.text){
-      try{
-      _auth.signUp(_emailController.text, _confirmpasswordController.text);
+
+    if (_passwordController.text == _confirmPasswordController.text) {
+      try {
+        _auth.signUp(_emailController.text, _confirmPasswordController.text);
       } catch (e) {
-        showDialog(context: context, builder: (context) => AlertDialog(title: Text(e.toString()),));
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(e.toString()),
+          ),
+        );
       }
-    } else{
-      showDialog(context: context, builder: (context) => AlertDialog(title: Text('Password dont match'),));
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text('Password dont match'),
+        ),
+      );
     }
   }
 
@@ -75,11 +87,11 @@ class RegisterPage extends StatelessWidget {
 
             SizedBox(height: 10),
 
-
+            // password tf
             CustomTextField(
-              hintText: 'Confirm your password',
+              hintText: 'Confirm password',
               isHidden: true,
-              controller: _confirmpasswordController,
+              controller: _confirmPasswordController,
             ),
 
             SizedBox(height: 20),
@@ -90,20 +102,29 @@ class RegisterPage extends StatelessWidget {
               onTap: () => registerMethod(context),
             ),
 
+            SizedBox(height: 20),
+
             // register label
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Already have an account? ',
-                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                Text(
+                  "Already have an account? ",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
                 GestureDetector(
                   onTap: togglePage,
-                  child: Text(' Login',
-                    style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold),
+                  child: Text(
+                    "Log in",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                )
+                ),
               ],
             )
           ],

@@ -1,23 +1,31 @@
-import 'package:chat_app/auth/auth_service.dart';
+import 'package:chat_app/service/auth/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import '../widgets/custom_button.dart';
 import '../widgets/custom_textfield.dart';
 
 class LoginPage extends StatelessWidget {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-    void Function()? togglePage;
+
+  final Function()? togglePage;
+
   LoginPage({super.key, required this.togglePage});
 
   void loginMethod(BuildContext context) async {
     final authService = AuthService();
 
     try {
-      await authService.signIn(_emailController.text, _passwordController.text,);
+      await authService.signIn(
+        _emailController.text,
+        _passwordController.text,
+      );
     } catch (e) {
-      showDialog(context: context, builder: (context) => AlertDialog(title: Text(e.toString()),));
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(e.toString()),
+        ),
+      );
     }
   }
 
@@ -77,20 +85,29 @@ class LoginPage extends StatelessWidget {
               onTap: () => loginMethod(context),
             ),
 
+            SizedBox(height: 20),
+
             // register label
 
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Dont have a account?',
-                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                Text(
+                  "Dont have an account? ",
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
                 GestureDetector(
                   onTap: togglePage,
-                  child: Text(' Register now',
-                    style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold),
+                  child: Text(
+                    "Register now",
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.primary,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                )
+                ),
               ],
             )
           ],
